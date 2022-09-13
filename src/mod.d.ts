@@ -214,6 +214,7 @@ declare namespace Meta {
         is_override_redirect(): boolean;
         is_skip_taskbar(): boolean;
         make_above(): void;
+        unmake_above(): void;
         make_fullscreen(): void;
         maximize(flags: MaximizeFlags): void;
         move_frame(user_op: boolean, x: number, y: number): void;

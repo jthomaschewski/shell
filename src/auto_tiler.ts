@@ -251,7 +251,9 @@ export class AutoTiler {
                 info.ignore_detach = false;
 
                 // make floating windows sticky
-                info.meta.make_above();
+                if (!info.meta.is_above()) {
+                    info.meta.make_above();
+                }
             });
         });
     }
@@ -489,6 +491,14 @@ export class AutoTiler {
 
     tile(ext: Ext, fork: Fork, area: Rectangle) {
         this.forest.tile(ext, fork, area);
+
+        const win = fork.entity
+        ext.windows.with(win, (info) => {
+            // unstick window when tiling (reverting float)
+            if (info.meta.is_above()) {
+                info.meta.unmake_above();
+            }
+        });
     }
 
     toggle_floating(ext: Ext) {
