@@ -247,7 +247,12 @@ export class AutoTiler {
                 this.tile(ext, fork, fork.area);
             }
 
-            ext.windows.with(win, (info) => info.ignore_detach = false);
+            ext.windows.with(win, (info) => {
+                info.ignore_detach = false;
+
+                // make floating windows sticky
+                info.meta.make_above();
+            });
         });
     }
 
